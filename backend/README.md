@@ -57,6 +57,39 @@ $ npm run test:e2e
 $ npm run test:cov
 ```
 
+## Bond module (bond calculation)
+
+Short overview for the interview:
+
+- Endpoint: POST /bond/calculate
+- Input DTO: `CalculateBondDto` with fields:
+  - `faceValue` (positive number)
+  - `annualCouponRate` (percent, positive number)
+  - `marketPrice` (positive number)
+  - `yearsToMaturity` (positive number)
+  - `couponFrequency` (1 = annual, 2 = semi-annual)
+
+- Output (summary): currentYield, ytm, totalInterest, premiumOrDiscount, cashFlowSchedule
+
+- Key implementation notes:
+  - Financial logic is implemented in `src/bond/lib/finance.ts` (pure functions) for easy unit testing.
+  - YTM calculation uses an analytic formula for zero-coupon bonds and a numeric bisection solver for coupon-bearing bonds, with a safe approximation fallback if bracketing fails.
+  - Rounding to 2 decimals occurs at the presentation boundary (outputs).
+
+- Tests included:
+  - Unit tests for finance helpers: `src/bond/lib/finance.spec.ts`
+  - Service/controller unit tests: `src/bond/*.spec.ts`
+  - E2E tests under `test/` (run with `npm run test:e2e`)
+
+Run the e2e tests when you want to exercise the full HTTP endpoint:
+
+```bash
+# e2e tests
+$ npm run test:e2e
+```
+
+If you want a quick demo-ready change during an interview, consider adding an optional `startDate` to the DTO to make schedules deterministic — the helper `buildCashFlowSchedule` already accepts an optional start date.
+
 ## Deployment
 
 When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
