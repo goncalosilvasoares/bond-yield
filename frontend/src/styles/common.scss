@@ -1,0 +1,77 @@
+.glass-card {
+  background: rgb(255 255 255 / 4%);
+  border: 1px solid rgb(255 255 255 / 8%);
+  border-radius: 24px;
+  backdrop-filter: blur(12px);
+  padding: 22px 24px;
+}
+
+ .gradient-button {
+  position: relative;
+  overflow: hidden;
+  border: none;
+  border-radius: 999px;
+  padding: 16px 32px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  color: white;
+  height: 56px;
+  background: linear-gradient(90deg, #9333ea, #ec4899);
+  transition: all 0.3s ease;
+  width: 326px;
+}
+
+.gradient-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.gradient-button .btn-text {
+  position: relative;
+  z-index: 2;
+  display: inline-block;
+  transition: all 0.3s ease;
+}
+
+.gradient-button .btn-hover {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  opacity: 0;
+  transform: translateX(30px);
+  transition: all 0.3s ease;
+}
+
+.gradient-button .btn-overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #7e22ce, #db2777);
+  transform: translate(-50%, -50%) scale(0);
+  transition: all 0.4s ease;
+  z-index: 1;
+}
+
+.gradient-button:hover .btn-text {
+  opacity: 0;
+  transform: translateX(-30px);
+}
+
+.gradient-button:hover .btn-hover {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.gradient-button:hover .btn-overlay {
+  width: 200%;
+  height: 200%;
+  transform: translate(-50%, -50%) scale(1);
+}

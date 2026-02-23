@@ -1,25 +1,37 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+
+import { useState } from 'react';
+import { Header } from './components/Header/Header';
+import { BondForm } from './components/BondForm/BondForm';
+import { BondResultType } from './components/BondResult/BondResult';
+import { CashFlowEntry } from './components/CashFlowTable/CashFlowTable';
+import { BondResultPanel } from './components/BondResultPanel/BondResultPanel';
+import { GenesisBackground } from './components/GenesisBackground/GenesisBackground';
+import './App.scss';
 
 function App() {
+  const [result, setResult] = useState<(BondResultType & { cashFlowSchedule: CashFlowEntry[] }) | null>(null);
+  const [error, setError] = useState<string | null>(null);
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <GenesisBackground>
+      <div>
+        <Header />
+        <main className="main-centered">
+          {error && <div style={{ color: 'red', marginTop: 16 }}>{error}</div>}
+          {
+            !result ? (
+              <BondForm onSuccess={setResult} onError={setError} />
+            ) : (
+              <BondResultPanel
+                result={result}
+                onRequestAgain={() => { setResult(null); setError(null); }}
+              />
+            )
+          }
+        </main>
+      </div>
+    </GenesisBackground>
   );
 }
 

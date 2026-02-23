@@ -1,0 +1,66 @@
+@import '../../styles/common';
+
+/* Wrapper consistente */
+.results-wrap {
+  width: 100%;
+  max-width: 920px;
+  margin: 0 auto;
+  padding: 40px 16px 60px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  font-family: Montserrat, 'Segoe UI', Arial, sans-serif;
+  text-align-last: center;
+}
+
+.results-wrap button {
+    width: 326px;
+}
+
+/* Card base (glass) para resultados e tabela */
+
+
+/* Título resultados */
+.bond-result h2 {
+  margin: 0 0 14px;
+  font-size: 20px;
+  font-weight: 700;
+  color: rgb(255 255 255 / 92%);
+  letter-spacing: -0.02em;
+}
+
+/* Lista em formato “linha” */
+.bond-result ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.bond-result li {
+  display: flex;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 10px 12px;
+  border-radius: 14px;
+  background: rgb(255 255 255 / 3%);
+  color: rgb(255 255 255 / 82%);
+  font-size: 14px;
+}
+
+/* Faz o label ficar “soft” e o valor mais forte */
+.bond-result li > :first-child {
+  color: rgb(255 255 255 / 62%);
+}
+
+/* Se não tens spans no li, isto ajuda a não ficar feio */
+.bond-result li {
+  white-space: nowrap;
+}
+
+.bond-result li {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
