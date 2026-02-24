@@ -10,16 +10,8 @@ interface WavyBackgroundProps {
   speed?: "slow" | "normal" | "fast";
   waveOpacity?: number;
 
-  /**
-   * NEW: controls how tight the waves are around the center.
-   * 0.10 = very tight, 0.25 = more spread
-   */
   centerSpread?: number;
 
-  /**
-   * NEW: shifts the wave pack up/down (0..1 of height)
-   * 0.5 = center, 0.45 = a bit higher
-   */
   centerY?: number;
 }
 
@@ -250,6 +242,7 @@ const waveParams = useMemo(() => {
           zIndex: 0,
           pointerEvents: "none",
           display: "block",
+          filter: blur > 0 ? `blur(${blur}px)` : "none",
         }}
       />
       <div style={{ position: "relative", zIndex: 2 }}>{children}</div>
