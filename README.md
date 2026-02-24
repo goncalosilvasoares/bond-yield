@@ -18,7 +18,7 @@ This project contains a full-stack bond yield calculator with a React frontend a
 
 1. Clone the repository:
    ```sh
-   git clone <repo-url>
+   git clone https://github.com/goncalosilvasoares/bond-yield.git
    cd bond-yield
    ```
 2. Install dependencies for both frontend and backend:
