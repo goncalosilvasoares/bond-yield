@@ -8,6 +8,8 @@ async function bootstrap() {
     app.useGlobalPipes(new common_1.ValidationPipe({ transform: true, whitelist: true }));
     app.enableCors({
         origin: ['https://bond-yield.vercel.app', 'http://localhost:3001'],
+        methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
+        allowedHeaders: ['Content-Type', 'Authorization'],
         credentials: true,
     });
     await app.listen(process.env.PORT ?? 3000);
