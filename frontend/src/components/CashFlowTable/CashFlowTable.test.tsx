@@ -2,12 +2,12 @@ import { render, screen } from '@testing-library/react';
 import { CashFlowTable, CashFlowEntry } from './CashFlowTable';
 jest.mock('../../i18n', () => ({ t: (key: string) => {
   const map: Record<string, string> = {
-    cashFlowSchedule: 'Cash Flow Schedule',
-    period: 'Period',
-    paymentDate: 'Payment Date',
-    couponPayment: 'Coupon Payment',
-    cumulativeInterest: 'Cumulative Interest',
-    remainingPrincipal: 'Remaining Principal',
+    'schedule.title': 'Cash Flow Schedule',
+    'schedule.period': 'Period',
+    'schedule.paymentDate': 'Payment Date',
+    'schedule.couponPayment': 'Coupon Payment',
+    'schedule.cumulativeInterest': 'Cumulative Interest',
+    'schedule.remainingPrincipal': 'Remaining Principal',
   };
   return map[key] || key;
 }}));
@@ -39,7 +39,7 @@ describe('CashFlowTable', () => {
     expect(screen.getByText('Cumulative Interest')).toBeInTheDocument();
     expect(screen.getByText('Remaining Principal')).toBeInTheDocument();
   expect(screen.getByText('1')).toBeInTheDocument();
-  expect(screen.getByText('2026-08-23T00:00:00Z')).toBeInTheDocument();
+  expect(screen.getByText('23-08-2026')).toBeInTheDocument();
   // There are three '25' values in the table (two coupon payments, one cumulative interest)
   expect(screen.getAllByText('25').length).toBeGreaterThanOrEqual(2);
   expect(screen.getAllByText('1000').length).toBeGreaterThanOrEqual(2);

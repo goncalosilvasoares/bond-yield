@@ -16,7 +16,7 @@ export type BondFormProps = {
   onError?: (error: string) => void;
 };
 
-export const BondForm: React.FC<BondFormProps> = ({ onSuccess, onError }) => {
+export const BondForm: React.FC<BondFormProps> = ({ onSuccess }) => {
   const [values, setValues] = useState<BondFormValues>({
     faceValue: '',
     annualCouponRate: '',
@@ -35,6 +35,11 @@ export const BondForm: React.FC<BondFormProps> = ({ onSuccess, onError }) => {
     e.preventDefault();
     setLoading(true);
     setError(null);
+    if (!values.faceValue || !values.annualCouponRate || !values.marketPrice || !values.yearsToMaturity) {
+      setError(t('form.error.requiredFields'));
+      setLoading(false);
+      return;
+    }
     try {
       const data = await calculateBond({
         faceValue: Number(values.faceValue),
@@ -45,8 +50,21 @@ export const BondForm: React.FC<BondFormProps> = ({ onSuccess, onError }) => {
       });
       onSuccess(data);
     } catch (err: any) {
-      setError(err.message || 'Request failed');
-      if (onError) onError(err.message || 'Request failed');
+      let msg = err.message || 'Request failed';
+      // If the error message matches a known translation, show it directly
+      if (msg === t('form.error.invalidInput')) {
+        setError(msg);
+      } else {
+        const lowerMsg = msg.toLowerCase();
+        if (lowerMsg.includes('invalid') || lowerMsg.includes('required')) {
+          msg = t('form.error.invalidInput');
+        } else if (lowerMsg.includes('network') || lowerMsg.includes('failed to fetch')) {
+          msg = t('form.error.network');
+        } else {
+          msg = t('form.error.generic');
+        }
+        setError(msg);
+      }
     } finally {
       setLoading(false);
     }
@@ -56,23 +74,23 @@ export const BondForm: React.FC<BondFormProps> = ({ onSuccess, onError }) => {
     <form className="bond-form" onSubmit={handleSubmit}>
       <label className="bond-field">
         <span>{t('form.faceValue')}</span>
-        <input name="faceValue" type="number" value={values.faceValue} onChange={handleChange} required min={1} />
+  <input name="faceValue" type="number" value={values.faceValue} onChange={handleChange} min={1} />
       </label>
       <label className="bond-field">
         <span>{t('form.annualCouponRate')}</span>
-        <input name="annualCouponRate" type="number" value={values.annualCouponRate} onChange={handleChange} required min={0} step={1} />
+  <input name="annualCouponRate" type="number" value={values.annualCouponRate} onChange={handleChange} min={0} step={1} />
       </label>
       <label className="bond-field">
         <span>{t('form.marketPrice')}</span>
-        <input name="marketPrice" type="number" value={values.marketPrice} onChange={handleChange} required min={1} />
+  <input name="marketPrice" type="number" value={values.marketPrice} onChange={handleChange} min={1} />
       </label>
       <label className="bond-field">
         <span>{t('form.yearsToMaturity')}</span>
-        <input name="yearsToMaturity" type="number" value={values.yearsToMaturity} onChange={handleChange} required min={0} step={1} />
+  <input name="yearsToMaturity" type="number" value={values.yearsToMaturity} onChange={handleChange} min={0} step={1} />
       </label>
       <label className="bond-field">
         <span>{t('form.couponFrequency')}</span>
-        <select name="couponFrequency" value={values.couponFrequency} onChange={handleChange} required>
+  <select name="couponFrequency" value={values.couponFrequency} onChange={handleChange}>
           <option value="1">{t('form.couponFrequency.annual')}</option>
           <option value="2">{t('form.couponFrequency.semiannual')}</option>
         </select>
@@ -89,7 +107,7 @@ export const BondForm: React.FC<BondFormProps> = ({ onSuccess, onError }) => {
           <span>{loading ? t('form.calculating') : t('form.calculate')}</span>
         </span>
       </button>
-      {error && <div style={{ color: 'red', marginTop: 16 }}>{error}</div>}
+  {error && <div style={{ color: 'red', marginTop: 16 }}>{error}</div>}
     </form>
   );
 };

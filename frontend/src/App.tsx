@@ -10,7 +10,6 @@ import './App.scss';
 
 function App() {
   const [result, setResult] = useState<(BondResultType & { cashFlowSchedule: CashFlowEntry[] }) | null>(null);
-  const [error, setError] = useState<string | null>(null);
 
 
   return (
@@ -18,14 +17,13 @@ function App() {
       <div>
         <Header />
         <main className="main-centered">
-          {error && <div style={{ color: 'red', marginTop: 16 }}>{error}</div>}
           {
             !result ? (
-              <BondForm onSuccess={setResult} onError={setError} />
+              <BondForm onSuccess={setResult} />
             ) : (
               <BondResultPanel
                 result={result}
-                onRequestAgain={() => { setResult(null); setError(null); }}
+                onRequestAgain={() => { setResult(null) }}
               />
             )
           }

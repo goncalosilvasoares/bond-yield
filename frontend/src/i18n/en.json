@@ -20,5 +20,9 @@
   "schedule.paymentDate": "Payment Date",
   "schedule.couponPayment": "Coupon Payment",
   "schedule.cumulativeInterest": "Cumulative Interest",
-  "schedule.remainingPrincipal": "Remaining Principal"
+  "schedule.remainingPrincipal": "Remaining Principal",
+  "form.error.requiredFields": "All fields are required. Please complete the form.",
+  "form.error.invalidInput": "Invalid input. Please check your values.",
+  "form.error.network": "Network error. Please try again.",
+  "form.error.generic": "An error occurred. Please try again."
 }
