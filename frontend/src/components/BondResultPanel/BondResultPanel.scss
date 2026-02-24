@@ -1,6 +1,5 @@
 @import '../../styles/common';
 
-/* Wrapper consistente */
 .results-wrap {
   width: 100%;
   max-width: 920px;
@@ -17,10 +16,6 @@
     width: 326px;
 }
 
-/* Card base (glass) para resultados e tabela */
-
-
-/* Título resultados */
 .bond-result h2 {
   margin: 0 0 14px;
   font-size: 20px;
@@ -29,7 +24,6 @@
   letter-spacing: -0.02em;
 }
 
-/* Lista em formato “linha” */
 .bond-result ul {
   list-style: none;
   padding: 0;
@@ -50,12 +44,10 @@
   font-size: 14px;
 }
 
-/* Faz o label ficar “soft” e o valor mais forte */
 .bond-result li > :first-child {
   color: rgb(255 255 255 / 62%);
 }
 
-/* Se não tens spans no li, isto ajuda a não ficar feio */
 .bond-result li {
   white-space: nowrap;
 }
