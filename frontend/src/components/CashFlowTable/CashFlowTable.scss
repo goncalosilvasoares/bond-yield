@@ -1,3 +1,20 @@
+// Export CSV button style
+.export-csv-btn {
+  display: inline-block;
+  margin-bottom: 12px;
+  padding: 6px 18px;
+  font-size: 13px;
+  font-weight: 700;
+  color: #fff;
+  background: #3b82f6;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.export-csv-btn:hover {
+  background: #2563eb;
+}
 @import '../../styles/genesis';
 
  .cash-flow-table {

@@ -38,10 +38,15 @@ describe('CashFlowTable', () => {
     expect(screen.getByText('Coupon Payment')).toBeInTheDocument();
     expect(screen.getByText('Cumulative Interest')).toBeInTheDocument();
     expect(screen.getByText('Remaining Principal')).toBeInTheDocument();
-  expect(screen.getByText('1')).toBeInTheDocument();
-  expect(screen.getByText('23-08-2026')).toBeInTheDocument();
-  // There are three '25' values in the table (two coupon payments, one cumulative interest)
-  expect(screen.getAllByText('25').length).toBeGreaterThanOrEqual(2);
-  expect(screen.getAllByText('1000').length).toBeGreaterThanOrEqual(2);
+    expect(screen.getByText('1')).toBeInTheDocument();
+    expect(screen.getByText('23-08-2026')).toBeInTheDocument();
+    // There are three '25' values in the table (two coupon payments, one cumulative interest)
+    expect(screen.getAllByText('25').length).toBeGreaterThanOrEqual(2);
+    expect(screen.getAllByText('1000').length).toBeGreaterThanOrEqual(2);
+  });
+
+  it('renders Export CSV button', () => {
+    render(<CashFlowTable schedule={schedule} />);
+    expect(screen.getByRole('button', { name: /export csv/i })).toBeInTheDocument();
   });
 });

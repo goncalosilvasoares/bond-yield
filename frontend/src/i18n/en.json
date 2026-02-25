@@ -24,5 +24,6 @@
   "form.error.requiredFields": "All fields are required. Please complete the form.",
   "form.error.invalidInput": "Invalid input. Please check your values.",
   "form.error.network": "Network error. Please try again.",
-  "form.error.generic": "An error occurred. Please try again."
+  "form.error.generic": "An error occurred. Please try again.",
+  "schedule.exportCsv": "Export CSV"
 }
